@@ -102,6 +102,7 @@ def fast_bbox_clip(arr, bbox):
     Clip array to bbox [north, west, south, east],
     but shift selection one pixel up (north) and left (west).
     Works even if coordinates are unsorted.
+    Base code is written by the authors. AI was used to edit.
     """
     north, west, south, east = bbox
 
@@ -130,6 +131,7 @@ def fast_bbox_clip_sel(arr, bbox, resolution=0.1):
     """
     Clip DataArray to bbox [north, west, south, east] using .sel with nearest.
     Works even if latitude is descending.
+    Base code is written by the authors. AI was used to edit.
     """
     north, west, south, east = bbox
 

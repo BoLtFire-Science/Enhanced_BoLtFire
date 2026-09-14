@@ -55,7 +55,8 @@ def generate_monthly_utcfiles_parallel(root_folder, worker_count=5):
             startDate = startDate + relativedelta(months=1)
 
 def process_utc_offset_accumulative(utc_offset,dataset,startDate,variable,root_folder):
-    """Process a single UTC offset for the given month for accumulative variables"""
+    """Process a single UTC offset for the given month for accumulative variables
+    Base code is written by the authors. AI was used to edit."""
 
     start = time.time()
 
@@ -95,7 +96,7 @@ def process_utc_offset_accumulative(utc_offset,dataset,startDate,variable,root_f
     print (f"Completed UTC offset {utc_offset} for {startDate.strftime('%Y%m')} and var {variable} in {time.time() - start:.2f} seconds")
 
 def process_utc_offset(utc_offset,dataset,startDate,variable,root_folder):
-    """Process a single UTC offset for the given month"""
+    """Process a single UTC offset for the given month."""
     start= time.time()
     slice_function_times = []
     day_offset = 0
@@ -148,6 +149,7 @@ def fast_bbox_clip(arr, bbox):
     Clip array to bbox [north, west, south, east],
     but shift selection one pixel up (north) and left (west).
     Works even if coordinates are unsorted.
+    Base code is written by the authors. AI was used to edit.
     """
     north, west, south, east = bbox
 
@@ -274,6 +276,7 @@ def calculate_relative_humidity(T, TD):
     """
     Calculate RH from 2m temperature (°C) and dewpoint temperature (K)
     using the formula from the image.
+    Base code is written by the authors. AI was used to edit.
     """
     T = _as_dataarray(T)
     TD = _as_dataarray(TD)
@@ -283,7 +286,7 @@ def calculate_relative_humidity(T, TD):
 
 def calculate_wind_speed(WU, WV):
     """
-    Calculate Wind Speed from U and V wind components
+    Calculate Wind Speed from U and V wind components.
     """
     WU = _as_dataarray(WU)
     WV = _as_dataarray(WV)
@@ -291,14 +294,13 @@ def calculate_wind_speed(WU, WV):
     return Wind_Speed
 
 def _as_dataarray(obj):
-    """Return a DataArray whether input is a DataArray or a single-var Dataset."""
+    """Return a DataArray whether input is a DataArray or a single-var Dataset.
+    AI was used to generate this code."""
     if isinstance(obj, xr.DataArray):
         return obj
     if isinstance(obj, xr.Dataset):
-        # pick the first data variable (works for single-var files)
         key = next(iter(obj.data_vars))
         return obj[key]
-    # fall back (shouldn't happen if using xarray IO)
     return xr.DataArray(obj)
 
 def clean(ds):

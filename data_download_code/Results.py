@@ -17,10 +17,10 @@ def normalize_continent(code: str) -> str:
 
 def get_fire_and_hold_labels():
     """
-    Base code is written by the authors. AI was used to edit.
     Returns:
       fire_labels: dict mapping unique_id → 0/1
       hold_labels: dict mapping unique_id → int(days of holdover; 0 if no fire)
+    Base code is written by the authors. AI was used to edit.
     """
     labels = {}
 
@@ -76,10 +76,10 @@ def get_fire_and_hold_labels():
 
 def compute_era5_means_with_offset():
     """
-    Base code is written by the authors. AI was used to edit.
     For each fire and LIWType, computes mean ERA5-Land variables (tp, t2m, ws, rh) for each 1-day offset in [-15, +15] relative to the lightning event. 
     Also includes invariant means (duration, multiplicity, peakcurrent, polarity) and NPP mean. 
     Saves results to CSV.
+    Base code is written by the authors. AI was used to edit.
     """
     dir = get_enhanced_boltfire_location()
     output_dir = get_csv_results()

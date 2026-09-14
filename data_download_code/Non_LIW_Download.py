@@ -18,7 +18,8 @@ from Utilities.Most_Used_Functions import getGlanceCRS
 from Utilities.Path_Utilities import get_gwis_main_dataset
 
 def clip_entln_by_liws_buffered(continent):
-    """Using the GWIS & BoLtFire datasets, for each BoLtFire LIW, search backwards year-by-year to find other lightning events that did not create a fire."""
+    """Using the GWIS & BoLtFire datasets, for each BoLtFire LIW, search backwards year-by-year to find other lightning events that did not create a fire.
+    Base code is written by the authors. AI was used to edit."""
     ClippedENTLN = []
     NonLIWs_wo_Flashes = []
     crs = getGlanceCRS(continent)
@@ -113,14 +114,14 @@ def clip_entln_by_liws_buffered(continent):
     # Save clipped ENTLN
     if ClippedENTLN:
         ClippedENTLN_gdf = gpd.GeoDataFrame(pd.concat(ClippedENTLN, ignore_index=True), crs=crs)
-        output_path = os.path.join(get_non_liws(), f"All_NonLIW_Flashes_{continent}_2026CHECK.shp")
+        output_path = os.path.join(get_non_liws(), f"All_NonLIW_Flashes_{continent}.shp")
         ClippedENTLN_gdf.to_file(output_path)
         print(f"Saved all Non-LIW flashes to: {output_path}")
 
     # Save fire records with no lightning found
     if NonLIWs_wo_Flashes:
         NonLIWs_gdf = gpd.GeoDataFrame(NonLIWs_wo_Flashes, crs=crs)
-        output_path_non = os.path.join(get_non_liws(), f"{continent}_NonLIWs_without_Flashes_2026CHECK.shp")
+        output_path_non = os.path.join(get_non_liws(), f"{continent}_NonLIWs_without_Flashes.shp")
         NonLIWs_gdf.to_file(output_path_non)
         print("Saved fires without flashes.")
 
@@ -131,7 +132,7 @@ def get_neares_flashes(continent):
     LIWFlashes_file_path = os.path.join(get_preprocessing_boltfire(), f"BoLtFire_Buffered_{continent}_All.shp")
     LIWFlashes_file = gpd.read_file(LIWFlashes_file_path).to_crs(getGlanceCRS(continent))
     # NonLIW BoltFire - flashes file location
-    NonLIWFlashes_file_path = os.path.join(get_non_liws(), f"All_NonLIW_Flashes_{continent}_2026CHECK.shp")
+    NonLIWFlashes_file_path = os.path.join(get_non_liws(), f"All_NonLIW_Flashes_{continent}.shp")
     NonLIWFlashes_file = gpd.read_file(NonLIWFlashes_file_path).to_crs(getGlanceCRS(continent))
 
     # Select Long,Lat for geometry to use in matching
@@ -160,7 +161,7 @@ def get_neares_flashes(continent):
             Nearest_NonLIW_Flash.append(nearest_row)
 
     Nearest_NonLIW_Flash_gpd = gpd.GeoDataFrame(Nearest_NonLIW_Flash, crs=getGlanceCRS(continent))
-    output_path = os.path.join(get_non_liws(), f"NonLIW_Nearest_Flash_{continent}_2026CHECK.shp")
+    output_path = os.path.join(get_non_liws(), f"NonLIW_Nearest_Flash_{continent}.shp")
     Nearest_NonLIW_Flash_gpd.to_file(output_path)
     print(f"Saved nearest Non-LIW flashes to: {output_path}")
 
@@ -194,7 +195,7 @@ def download_non_liw_image_modis(continent, NonLIW_file_path):
         FireID = str(row["FireID"])
         if FireID in downloaded_NonLIWs:
             continue
-        base_output = os.path.join("D:/Paper2/data/ERA5_land/Full_Dataset/NonLIWs/", "Imagery", continent, FireID)
+        base_output = os.path.join(get_non_liws(), "Imagery", continent, FireID)
         # if the folder exists and contains any files, assume we're done
         if os.path.isdir(base_output) and any(os.scandir(base_output)):
             print(f"Skipping {FireID}: output already exists at {base_output}")

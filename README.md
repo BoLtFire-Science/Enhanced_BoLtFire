@@ -40,6 +40,7 @@ ws_mean: mean maximum wind speed (m/s) for the 24-hour offset day (calculated pe
 rh_mean: Mean relative humidity (%) for the 24-hour offset day (calculated per Wanielista et al., 1997)
 
 
+Engle, B., & Bratoev, I. (2025). BoLtFire Code Release version 1 (Version v1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.15425620
 
 Engle, B., Bratoev, I., Crowley, M. A., Zhu, Y., & Senf, C. (2025A). Distribution and Characteristics of Lightning-Ignited Wildfires in Boreal Forests – the BoLtFire database (3.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.14940326
 

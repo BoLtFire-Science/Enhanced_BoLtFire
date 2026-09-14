@@ -10,6 +10,14 @@ from rasterio.transform import from_bounds
 from Utilities.Most_Used_Functions import snap_bbox_to_grid
 from Utilities.Path_Utilities import get_era5_reanalysis_folder
 
+def scale_to_bounds(data, grid_size=(512, 512)):
+    """
+    Scale the input data to fit within the bounds of a given geometry and grid size.
+    Here we are just replicating the value across the entire grid for simplicity.
+    """
+    scaled_data = np.full(grid_size, data)
+    return scaled_data
+
 
 def generate_invariants_data(lightning_path, LIWtype):
     """For each fire, generates invariant data (peak current, multiplicity, duration, polarity, month) 

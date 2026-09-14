@@ -13,6 +13,9 @@ from Utilities.Path_Utilities import getEnhancedBoltFire_Location, getInputParam
 from Utilities.Most_Used_Functions import snap_bbox_to_grid
 
 def MODIS_download_geotiff(image, bounds, geotiff_path, scale=500):
+    """Downloads MODIS Geotiff.
+    Base code is written by the authors. AI was used to edit.
+    """
     if os.path.exists(geotiff_path):
         print(f"{geotiff_path} exists, skipping!")
         return True
@@ -54,6 +57,9 @@ def MODIS_download_variables():
 
 
 def MODIS_download_numpy_direct(image, bounds, npy_output_path, scale_factor=0.0001, fill_value=np.nan):
+    """Download MODIS numpy.
+    Base code is written by the authors. AI was used to edit.
+    """
     if os.path.exists(npy_output_path):
         print(f"{npy_output_path} skipping, already there")
         return True

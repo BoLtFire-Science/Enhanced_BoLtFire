@@ -86,6 +86,9 @@ def MODIS_download_numpy_direct(image, bounds, npy_output_path, scale_factor=0.0
 
 
 def MODIS_downloads(lightning_path, LIWtype):
+    """MODIS NPP Download from Start of Year untill lightning occurrence. 
+    Base code is written by the authors. AI was used to edit.
+    """
     fires = gpd.read_file(lightning_path).to_crs(4326)
 
     downloaded_fires = []
